@@ -17,7 +17,7 @@ export const propertySchema = z.object({
   beds: z.coerce.number().positive().min(0).max(10).int(),
   baths: z.coerce.number().positive().min(0).max(10).int(),
   squareFeet: z.coerce.number().int().positive(),
-  propertyType: z.nativeEnum(PropertyTypeEnum),
+  propertyType: z.enum(PropertyTypeEnum),
   address: z.string().min(1, "Address is required"),
   city: z.string().min(1, "City is required"),
   state: z.string().min(1, "State is required"),
@@ -29,7 +29,7 @@ export type PropertyFormData = z.infer<typeof propertySchema>;
 
 export const applicationSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
   message: z.string().optional(),
 });
@@ -38,7 +38,7 @@ export type ApplicationFormData = z.infer<typeof applicationSchema>;
 
 export const settingsSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
 });
 

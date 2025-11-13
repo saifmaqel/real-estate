@@ -49,3 +49,32 @@ export const createManager = async (
     res.status(500).json({ message: `Error creating manager: ${error}` });
   }
 };
+
+export const updateManager = async (req: Request, res: Response) => {
+  try {
+    const { cognitoId } = req.params;
+    const { name, email, phoneNumber } = req.body;
+
+    if (!cognitoId || !name || !email || !phoneNumber) {
+      res.status(400).json({ error: "Missing Inputs" });
+      return;
+    }
+
+    const manager = await prisma.manager.update({
+      where: { cognitoId: cognitoId },
+      data: {
+        name,
+        email,
+        phoneNumber,
+      },
+    });
+
+    res.json(manager);
+  } catch (error) {
+    res.status(500).json({
+      message: `Error updating manager ${
+        error instanceof Error ? error.message : "Unknown Error"
+      }`,
+    });
+  }
+};
