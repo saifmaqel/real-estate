@@ -8,6 +8,9 @@ import type { Request, Response } from "express";
 import { authMiddleware } from "./middleware/authMiddleware.ts";
 import tenantRoutes from "./routes/tenantRoutes.ts";
 import managerRoutes from "./routes/managerRoutes.ts";
+import propertyRoutes from "./routes/propertyRoutes.ts";
+import leaseRoutes from "./routes/leaseRoutes.ts";
+import applicationRoutes from "./routes/applicationRoutes.ts";
 /* ROUTE IMPORT */
 
 /* CONFIGURATIONS */
@@ -27,6 +30,9 @@ app.get("/", (req: Request, res: Response) => {
 });
 app.use("/tenants", authMiddleware(["tenant"]), tenantRoutes);
 app.use("/managers", authMiddleware(["manager"]), managerRoutes);
+app.use("/properties", propertyRoutes);
+app.use("/lease", leaseRoutes);
+app.use("/applications", applicationRoutes);
 
 const port = Number(process.env.PORT) || 3002;
 app.listen(port, "0.0.0.0", () => {

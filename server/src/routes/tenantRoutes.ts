@@ -3,7 +3,7 @@ import {
   getTenant,
   createTenant,
   updateTenant,
-} from "../controllers/tenantController.ts";
+} from "../controllers/tenantControllers.ts";
 
 const router = express.Router();
 
